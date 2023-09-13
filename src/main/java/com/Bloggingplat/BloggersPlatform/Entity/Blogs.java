@@ -25,6 +25,5 @@ public class Blogs {
     private Boolean published;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "blogId")
     private List<Comments> comments = new ArrayList<>();
 }

@@ -5,6 +5,7 @@ import com.Bloggingplat.BloggersPlatform.Repo.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BlogService {
@@ -53,10 +54,10 @@ public class BlogService {
         return "All blogs are deleted!!!";
     }
 
-    public String deleteBlogById(long id){
-        blogRepository.deleteById(id);
-        return "Blog of 'id: "+id+"' is deleted successfully!";
-    }
+//    public String deleteBlogById(long id){
+//        blogRepository.deleteById(id);
+//        return "Blog of 'id: "+id+"' is deleted successfully!";
+//    }
 
     public List<Blogs> getPublishedBlogs(){
        return blogRepository.findAll().stream().filter(Blogs::getPublished).toList();

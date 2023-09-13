@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -44,13 +45,14 @@ public class BlogController {
         return blogService.deleteBlogs();
     }
 
-    @DeleteMapping(path = "/blogs/:{id}")
-    public String deleteBlogById(@PathVariable long id){
-        return blogService.deleteBlogById(id);
-    }
+//    @DeleteMapping(path = "/blogs/:{id}")
+//    public String deleteBlogById(@PathVariable long id){
+//        return blogService.deleteBlogById(id);
+//    }
 
     @GetMapping(path = "/blogs/published")
     public List<Blogs> getPublishedBlogs(){
         return blogService.getPublishedBlogs();
     }
+
 }
