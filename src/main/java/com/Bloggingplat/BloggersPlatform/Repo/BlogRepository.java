@@ -15,5 +15,4 @@ public interface BlogRepository extends JpaRepository<Blogs, Long> {
     List<Blogs> findAll();
 
     Blogs findById(long id);
-
 }

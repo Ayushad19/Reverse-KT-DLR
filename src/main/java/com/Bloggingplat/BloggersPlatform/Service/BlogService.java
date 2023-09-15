@@ -5,7 +5,6 @@ import com.Bloggingplat.BloggersPlatform.Repo.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BlogService {
@@ -14,12 +13,6 @@ public class BlogService {
 
     @Autowired
     private CommentRepository commentRepository;
-
-    @Autowired
-    public BlogService(BlogRepository blogRepository, CommentRepository commentRepository){
-        this.blogRepository = blogRepository;
-        this.commentRepository = commentRepository;
-    }
 
     public String saveBlogs(Blogs blogs){
          blogRepository.save(blogs);
@@ -34,14 +27,14 @@ public class BlogService {
         return blogRepository.findById(id);
     }
 
-    public String updateBlog(Blogs updatedBlog, long id){
+    public String updateBlog(Blogs update, long id){
 
         Blogs temp = blogRepository.findById(id);
         if (temp != null)
         {
-            temp.setTitle(updatedBlog.getTitle());
-            temp.setDescription(updatedBlog.getDescription());
-            temp.setPublished(updatedBlog.getPublished());
+            temp.setTitle(update.getTitle());
+            temp.setDescription(update.getDescription());
+            temp.setPublished(update.getPublished());
             blogRepository.save(temp);
             return "Blog of id: "+id+" updated successfully";
 
@@ -49,10 +42,14 @@ public class BlogService {
         return "Blog does not exists";
     }
 
-    public String deleteBlogs(){
-        blogRepository.deleteAll();
-        return "All blogs are deleted!!!";
-    }
+    //These below two methods are no longer in use after the relationship establishment between
+    //blogs and comments where Blogs entity is the parent class and has a foreign constraint in Comments
+    //entity
+
+//    public String deleteBlogs(){
+//        blogRepository.deleteAll();
+//        return "All blogs are deleted!!!";
+//    }
 
 //    public String deleteBlogById(long id){
 //        blogRepository.deleteById(id);

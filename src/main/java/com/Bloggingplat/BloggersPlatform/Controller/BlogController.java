@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -22,7 +21,12 @@ public class BlogController {
 
     @PostMapping(path = "/blogs")
     public String saveBlogs(@RequestBody Blogs blogs){
-        return blogService.saveBlogs(blogs);
+        try {
+            return blogService.saveBlogs(blogs);
+        }
+        catch(Exception e) {
+            return "Please enter a valid entry";
+        }
     }
 
     @GetMapping(path = "/blogs")
@@ -36,14 +40,18 @@ public class BlogController {
     }
 
     @PutMapping(path = "/blogs/:{id}")
-    public String updateBlog(@RequestBody Blogs updatedBlog, @PathVariable long id){
-        return blogService.updateBlog(updatedBlog, id);
+    public String updateBlog(@RequestBody Blogs update, @PathVariable long id){
+        return blogService.updateBlog(update, id);
     }
 
-    @DeleteMapping(path = "/blogs")
-    public String DeleteBlogs(){
-        return blogService.deleteBlogs();
-    }
+    //These below two requests are no longer in use after the relationship establishment between
+    //blogs and comments where Blogs entity is the parent class and has a foreign constraint in Comments
+    //entity
+
+//    @DeleteMapping(path = "/blogs")
+//    public String DeleteBlogs(){
+//        return blogService.deleteBlogs();
+//    }
 
 //    @DeleteMapping(path = "/blogs/:{id}")
 //    public String deleteBlogById(@PathVariable long id){
